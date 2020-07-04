@@ -1,0 +1,132 @@
+<div data-name="registration" class="page">  
+  <!-- Fixed Toolbar -->
+  <div class="toolbar toolbar-bottom">
+    <div class="toolbar-inner display-block ">
+      <a class="link"><div class="text-white">Version 1.0</div></a>
+    </div>
+  </div>
+  <div class="page-content ">                  
+          <div class="login-content display-block">
+            <div class="logo display-block">
+              <a href="#"><img src="img/logo.png" /></a>
+            </div>
+
+            <div class="logo_seocnd display-none">
+              <div class="row">
+                <div class="col-20"></div>
+                <div class="col-60">
+                  <div class="only_logo float-left"><img src="img/only_logo.png" /></div>
+                  <div class="sanghvi_letters float-left pt-12p"><img src="img/sangvi_letters.png" class="logoimg" /></div>
+                </div>
+                <div class="col-20"></div>
+              </div>
+              
+            </div>
+
+            <form id="registration_from" class="rform">               
+              <div class="row " id="mainrow">
+                <div class="col-10"></div>
+                <!----- FIRST PART ------>
+                <div class="col-80 display-block" id="first_section"> 
+                  <div class="col">
+                    <div class="elevation-9 el-9 mb-10p">
+                      <h4 class="text-left text-capitalize pl-3p mb-5p">registration</h4>
+                      <!--img src="img/line.png" width="250"/-->
+                      <div class="border"><span class="border-green"></span><span class="border-blue"></span></div>
+
+                      <div class="list no-hairlines-md">
+                        <ul>
+                          <li class="item-content item-input item-input-outline">
+                            <div class="item-inner">
+                              <div class="item-title item-floating-label">Name</div>          
+                              <div class="item-input-wrap">
+                                <input type="text" placeholder="Name" name="reg_name" id="reg_name">
+                                <span class="input-clear-button"></span>
+                              </div>
+                            </div>
+                          </li>
+                          <span class="text-left text-red fs-12" id='nameerror'></span>
+
+                          <li class="item-content item-input item-input-outline">
+                            <div class="item-inner">
+                              <div class="item-title item-floating-label">Email Address</div>          
+                              <div class="item-input-wrap">
+                              <!--div class="inputbox">
+                                <i class="f7-icons text-white fs-26">envelope</i-->
+                                <input type="text" placeholder="Email Address" name="reg_email" id="reg_email" onkeyup="checkemailexists(this.value)">
+                                <span class="input-clear-button"></span>
+                              <!--/div-->
+                              </div>
+                            </div>
+                          </li>
+                          <span class="text-left text-red fs-12" id='regemailerror'></span>
+
+                          <li class="item-content item-input item-input-outline">
+                            <div class="item-inner">
+                              <div class="item-title item-floating-label">Mobile Number</div>          
+                              <div class="item-input-wrap">
+                                <input type="number" placeholder="Mobile Number" name="reg_mobile" id="reg_mobile" class="reg_mobile" onkeyup="checklength(this.value)" >
+                                <span class="input-clear-button"></span>
+                              </div>
+                            </div>
+                          </li>
+                          <span class="text-left text-red fs-12" id='moberror'></span>
+
+                          <li class="item-content item-input item-input-outline">
+                            <div class="item-inner">
+                              <div class="item-title item-floating-label">Password</div>
+                              <div class="item-input-wrap">
+                                <input type="password" placeholder="Password" name="reg_pass" id="reg_pass" onkeyup="compare_pass()">
+                                <span class="input-clear-button"></span>
+                              </div>
+                            </div>
+                          </li>
+                          <span class="text-left text-red fs-12" id='regpasserror'></span>
+
+                          <li class="item-content item-input item-input-outline">
+                            <div class="item-inner">
+                              <div class="item-title item-floating-label">Re-enter Password</div>
+                              <div class="item-input-wrap">
+                                <input type="password" placeholder="Re-enter Password" name="re_pass" id="re_pass" onkeyup="compare_pass()">
+                                <span class="input-clear-button"></span>
+                              </div>
+                            </div>
+                          </li>
+                          <span class="text-left text-red fs-12" id='regre_passerror'></span>
+                          <span class="text-left text-red fs-12" id='nosame_passerror'></span>
+                        </ul>
+                        
+                        <div class="block">
+                          <div class="row">
+                            <button type="button" class="col button button-fill loginbtn" onclick="secondpart_reg()" id="next_btn">Next</button>
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!----- SECOND PART ------>
+                <br/>
+                <div class="col-100 display-none" id="second_section">                
+                    <div class="text-center fw-600">I am intrested in...</div>
+                    <div class="block mt-5p categories">                      
+                    </div>
+                    
+                </div>
+
+
+                <div class="col-10"></div>
+              </div>
+
+
+              
+
+              
+
+
+            </form>                       
+          </div>
+        </div>
+</div>

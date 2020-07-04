@@ -1,0 +1,42 @@
+<div data-name="otp_verify" class="page navbar-fixed toolbar-fixed">
+   <div class="page-content otp-verify-screen">    
+    <div class="otp-content">
+      <div class="signup-txt text-center">
+        <a href="#"><div class="text-white text-uppercase p-12p fs-16" id="app_ID">otp verification</div></a>
+      </div> 
+      <div class="block text-white otp_txt text-white"></div> 
+      <!--div class="block text-white otp_exp">OTP expire in <span class="countdown"></span> minutes.</div-->
+      <form name="otpverify" id="otpverify" class="otpverify">
+      <input type="hidden" name="last_ins_id" id="last_ins_id">
+      <div class="list no-hairlines-md">
+        <ul class="no-bg">
+          <li class="item-content item-input item-input-outline">
+            <div class="item-inner">
+              <div class="item-title item-floating-label no-bg">OTP</div>          
+              <div class="item-input-wrap">
+                <!--div class="inputbox">
+                  <i class="f7-icons text-white fs-26">envelope</i-->
+                  <input type="number" class="text-white" placeholder="OTP" name="otp_ver" id="otp_ver">
+                  <span class="input-clear-button"></span>
+                <!--/div-->
+              </div>
+            </div>
+          </li>
+          </ul>
+        </div> 
+        <div id="reg_formDiv">       
+          <!--div class="preg_inputbox">
+            <span id="eyeicon"><i class="f7-icons text-white" onclick="showletter('show')">eye</i></span>   
+            <input type="password" placeholder="Enter OTP" name="otp" id='otp' class="pholder" >           
+          </div-->
+
+          <div class="block">
+            <div class="col"><a class="button form-btn text-white no-radius text-uppercase verify_btn" href="#" 
+            onclick="verify_otp()">verify</a></div>
+            <!--div class="col"><a class="button back-btn text-white no-radius display-none resndotp" onclick="resendOTP_customer()">Resend OTP</a></div-->      
+          </div>
+        </div>
+      </form>
+    </div>    
+  </div>
+</div>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta content="width=device-width, initial-scale=1" name="viewport"> 
+    <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta HTTP-EQUIV="Expires" CONTENT="-1">   
+    
+    <link rel="stylesheet" type="text/css" href="css/framework7.bundle.css">    
+    <!--link rel="stylesheet" type="text/css" href="css/material-icons.css"-->
+    <link rel="stylesheet" type="text/css" href="css/custom.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <title>Sanghvi Consultancy</title>
+</head> 
+
+<body>
+<div id="app">  
+  <div class="statusbar"></div> 
+    <div class="view view-main view-init" data-url="/">
+      <div class="page no-navbar no-swipeback" data-name="index">     
+        <!-- Fixed Toolbar -->
+        <div class="toolbar toolbar-bottom">
+          <div class="toolbar-inner display-block ">
+            <a class="link"><div class="text-white">Version 1.0</div></a>
+          </div>
+        </div>
+        <div class="page-content login-screen-content">                  
+          <div class="login-content">
+            <div class="logo">
+              <a href="#"><img src="img/logo.png" /></a>
+            </div>
+            <form id="login_from" class="lform"> 
+              <div class="row">
+                <div class="col-10"></div>
+                <div class="col-80">
+                  <div class="col">
+                    <div class="elevation-9 el-9">
+                      <h4 class="text-left text-capitalize pl-3p mb-5p">login</h4>
+                      <!--img src="img/line.png" width="250"/-->
+                      <div class="border"><span class="border-green"></span><span class="border-blue"></span></div>
+
+                      <div class="list no-hairlines-md">
+                        <ul>
+                          <li class="item-content item-input item-input-outline">
+                            <div class="item-inner">
+                              <div class="item-title item-floating-label">Email Address</div>          
+                              <div class="item-input-wrap">
+                                <!--div class="inputbox">
+                                  <i class="f7-icons text-white fs-26">envelope</i-->
+                                  <input type="text" placeholder="Email Address" name="email" id="email">
+                                  <span class="input-clear-button"></span>
+                                <!--/div-->
+                              </div>
+                            </div>
+                          </li>
+                          <span class="text-left text-red fs-12" id='emailerror'></span>
+
+                          <li class="item-content item-input item-input-outline">
+                            <div class="item-inner">
+                              <div class="item-title item-floating-label">Password</div>
+                              <div class="item-input-wrap">
+                                <input type="password" placeholder="Password" name="password" id="password">
+                                <span class="input-clear-button"></span>
+                              </div>
+                            </div>
+                          </li>
+                          <span class="text-left text-red fs-12" id='passerror'></span>
+
+
+                        </ul>
+                        <div class="block">
+                          <div class="row">
+                            <button type="button" class="col button button-fill loginbtn" onclick="logincheck()">Login</button>
+                          </div>
+                        </div>
+
+                        <div class="block">
+                          <div class="row">
+                            <div class="fs-12 text-capitalize">
+                              <a href="/registration/" class="font-blue fw-600">create account</a>
+                                <!--a href="/otp_verify/null/" class="font-blue fw-600">create account</a-->
+                            </div>
+                          </div>
+
+                          <div class="row ">
+                            <div class="fs-12 text-capitalize mt-5">
+                              <a href="#" class="font-blue fw-600">forgot your password?</a>
+                            </div>
+                          </div>
+                        </div>                      
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-10"></div>
+              </div>
+            </form>                       
+          </div>
+        </div>      
+    </div>
+  </div>
+</div>  
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/framework7.js"></script>
+<script type="text/javascript" src="js/framework7.bundle.min.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/routes.js"></script>
+<script type="text/javascript" src="js/app.js"></script> 
+</body>
+</html>
