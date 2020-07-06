@@ -395,50 +395,51 @@ $(document).on('page:init', '.page[data-name="dashboard"]', function (page) {
   //$(".slider").removeClass("slider_bottom");
   $(".swiper-container_slider").removeClass("slider_bottom");
   var slides='';
-  $.ajax({
-    type:'POST',     
-    url:base_url+'APP/Appcontroller/sliderimages', 
-    success:function(res){      
-      var parseres = $.parseJSON(res);
-      var slider = parseres.slider; 
-      var tot_slides = slider.length;
-      for(var i=0;i<tot_slides;i++){
-        var adv_img_path = slider[i].adv_img_path;
-        slides+='<div class="swiper-slide dash_slides"><img src="'+base_url+adv_img_path+'" class="w-100 slide-height"></div>';
+  setTimeout(function(){
+    $.ajax({
+      type:'POST',     
+      url:base_url+'APP/Appcontroller/sliderimages', 
+      success:function(res){      
+        var parseres = $.parseJSON(res);
+        var slider = parseres.slider; 
+        var tot_slides = slider.length;
+        for(var i=0;i<tot_slides;i++){
+          var adv_img_path = slider[i].adv_img_path;
+          slides+='<div class="swiper-slide dash_slides"><img src="'+base_url+adv_img_path+'" class="w-100 slide-height"></div>';
+        }
+        if(tot_slides>0){
+          $(".swiper-wrapper").html(slides);
+            var swiper1 = new Swiper('.swiper-container_slider', {
+            //parallax: true,
+            //autoHeight: true,
+            setWrapperSize: true,
+            slidesPerView: 1,
+            spaceBetween: 0,  
+            centeredSlides: true,
+            autoplay: {
+              delay: 3000,
+              disableOnInteraction: false,
+            },
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true, 
+              dynamicBullets: true,
+            },
+            observer: true,
+            observeParents: true, 
+          });
+        }else{
+          $(".swiper-container_slider").remove();
+        }
+        /*var total_records = parseres.total_records;
+        if(total_records==0){
+          $(".swiper-container_slider").addClass("slider_bottom");
+        }else{
+          $(".swiper-container_slider").removeClass("slider_bottom");
+        }*/
       }
-      if(tot_slides>0){
-        $(".swiper-wrapper").html(slides);
-          var swiper1 = new Swiper('.swiper-container_slider', {
-          //parallax: true,
-          //autoHeight: true,
-          setWrapperSize: true,
-          slidesPerView: 1,
-          spaceBetween: 0,  
-          centeredSlides: true,
-          autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-          },
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true, 
-            dynamicBullets: true,
-          },
-          observer: true,
-          observeParents: true, 
-        });
-      }else{
-        $(".swiper-container_slider").remove();
-      }
-      /*var total_records = parseres.total_records;
-      if(total_records==0){
-        $(".swiper-container_slider").addClass("slider_bottom");
-      }else{
-        $(".swiper-container_slider").removeClass("slider_bottom");
-      }*/
-    }
-  });
-
+    });
+  },5000);
   $.ajax({
     type:'POST',     
     url:base_url+'APP/Appcontroller/getCategoriesDashboard', 
@@ -552,49 +553,51 @@ $(document).on('page:init', '.page[data-name="company_category"]', function (pag
   //alert("page loaded");
   $(".swiper-container_slider1").removeClass("slider_bottom");
   var slides='';
-  $.ajax({
-    type:'POST',     
-    url:base_url+'APP/Appcontroller/sliderimages', 
-    success:function(res){      
-      var parseres = $.parseJSON(res);
-      var slider = parseres.slider; 
-      var tot_slides = slider.length;
-      for(var i=0;i<tot_slides;i++){
-        var adv_img_path = slider[i].adv_img_path;
-        slides+='<div class="swiper-slide dash_slides"><img src="'+base_url+adv_img_path+'" class="w-100 slide-height"></div>';
+  setTimeout(function(){
+    $.ajax({
+      type:'POST',     
+      url:base_url+'APP/Appcontroller/sliderimages', 
+      success:function(res){      
+        var parseres = $.parseJSON(res);
+        var slider = parseres.slider; 
+        var tot_slides = slider.length;
+        for(var i=0;i<tot_slides;i++){
+          var adv_img_path = slider[i].adv_img_path;
+          slides+='<div class="swiper-slide dash_slides"><img src="'+base_url+adv_img_path+'" class="w-100 slide-height"></div>';
+        }
+        if(tot_slides>0){ 
+          $(".swiper-wrapper").html(slides);
+            var swiper2 = new Swiper('.swiper-container_slider1', {
+            //parallax: true,
+            //autoHeight: true,
+            setWrapperSize: true,
+            slidesPerView: 1,
+            spaceBetween: 0,  
+            centeredSlides: true,
+            autoplay: {
+              delay: 3000,
+              disableOnInteraction: false,
+            },
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true, 
+              dynamicBullets: true,
+            },
+            observer: true,
+            observeParents: true, 
+          });
+        }else{
+          $(".swiper-container_slider1").remove();
+        }
+        /*var total_records = parseres.total_records;
+        if(total_records==0){
+          $(".swiper-container_slider").addClass("slider_bottom");
+        }else{
+          $(".swiper-container_slider").removeClass("slider_bottom");
+        }*/
       }
-      if(tot_slides>0){ 
-        $(".swiper-wrapper").html(slides);
-          var swiper2 = new Swiper('.swiper-container_slider1', {
-          //parallax: true,
-          //autoHeight: true,
-          setWrapperSize: true,
-          slidesPerView: 1,
-          spaceBetween: 0,  
-          centeredSlides: true,
-          autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-          },
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true, 
-            dynamicBullets: true,
-          },
-          observer: true,
-          observeParents: true, 
-        });
-      }else{
-        $(".swiper-container_slider1").remove();
-      }
-      /*var total_records = parseres.total_records;
-      if(total_records==0){
-        $(".swiper-container_slider").addClass("slider_bottom");
-      }else{
-        $(".swiper-container_slider").removeClass("slider_bottom");
-      }*/
-    }
-  });
+    });
+  },5000);
   app.preloader.hide();
 });
 /*$(document).on('page:init', '.page[data-name="company_category"]', function (page) {
@@ -665,7 +668,7 @@ $(document).on('page:init', '.page[data-name="products"]', function (page) {
   app.preloader.show();
   $(".cat_name").html(cat_name);
   var slides='';
-  var slides='';
+  
   $.ajax({
     type:'POST',     
     url:base_url+'APP/Appcontroller/sliderimages', 
