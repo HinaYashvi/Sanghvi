@@ -19,8 +19,7 @@
                   <div class="sanghvi_letters float-left pt-12p"><img src="img/sangvi_letters.png" class="logoimg" /></div>
                 </div>
                 <div class="col-20"></div>
-              </div>
-              
+              </div>              
             </div>
 
             <form id="registration_from" class="rform">               
@@ -53,13 +52,14 @@
                               <div class="item-input-wrap">
                               <!--div class="inputbox">
                                 <i class="f7-icons text-white fs-26">envelope</i-->
-                                <input type="text" placeholder="Email Address" name="reg_email" id="reg_email" onkeyup="checkemailexists(this.value)">
+                                <input type="text" placeholder="Email Address" name="reg_email" id="reg_email" onkeyup="checkemailexists(this.value);ValidateEmail(this.value)">
                                 <span class="input-clear-button"></span>
                               <!--/div-->
                               </div>
                             </div>
                           </li>
                           <span class="text-left text-red fs-12" id='regemailerror'></span>
+                          <span class="text-left text-red fs-12" id='invalidemailerror'></span>
 
                           <li class="item-content item-input item-input-outline">
                             <div class="item-inner">
@@ -76,7 +76,7 @@
                             <div class="item-inner">
                               <div class="item-title item-floating-label">Password</div>
                               <div class="item-input-wrap">
-                                <input type="password" placeholder="Password" name="reg_pass" id="reg_pass" onkeyup="compare_pass()">
+                                <input type="password" placeholder="Password" name="reg_pass" id="reg_pass" onkeyup="compare_pass()" onfocusout="checkspecialchars(this.value)">
                                 <span class="input-clear-button"></span>
                               </div>
                             </div>
@@ -87,18 +87,24 @@
                             <div class="item-inner">
                               <div class="item-title item-floating-label">Re-enter Password</div>
                               <div class="item-input-wrap">
-                                <input type="password" placeholder="Re-enter Password" name="re_pass" id="re_pass" onkeyup="compare_pass()">
+                                <input type="password" placeholder="Re-enter Password" name="re_pass" id="re_pass" onkeyup="compare_pass()" onfocusout="checkspecialchars(this.value)">
                                 <span class="input-clear-button"></span>
                               </div>
                             </div>
                           </li>
+                          <span class="text-left text-red fs-12" id='lblError'></span>
                           <span class="text-left text-red fs-12" id='regre_passerror'></span>
                           <span class="text-left text-red fs-12" id='nosame_passerror'></span>
                         </ul>
                         
                         <div class="block">
-                          <div class="row">
-                            <button type="button" class="col button button-fill loginbtn" onclick="secondpart_reg()" id="next_btn">Next</button>
+                          <div class="row">                            
+                            <div class="col">
+                              <a class="col button lbtn-outline " href="/">Back</a>
+                            </div>
+                            <div class="col">
+                              <button type="button" class="col button button-fill loginbtn" onclick="secondpart_reg()" id="next_btn">Next</button>
+                            </div>
                           </div>
                         </div>
 

@@ -110,6 +110,9 @@ h1 {
 .text-uppercase{
   text-transform:uppercase;
 }
+.text-lowercase{
+  text-transform: lowercase;
+}
 .logo,.logo_seocnd { 
     margin-top: 10%;
     line-height: 20px;
@@ -133,6 +136,12 @@ h1 {
 .pt-5p{
   padding-top: 5%;
 }
+.only_logo_db img{
+  height: 50px!important; 
+}
+.pt-5p{
+  padding-top: 5%;
+}
 .pt-8p{
   padding-top: 8%;
 }
@@ -147,6 +156,9 @@ h1 {
 }
 .sanghvi_letters img{
   height: 40px;
+}
+.sanghvi_letters_db img{
+  height: 26px;
 }
 .el-9{
     border: 1px solid #d9dde0;
@@ -186,6 +198,12 @@ h1 {
 .mt-5p{
     margin-top: 5%;
 }
+.mt-3p{
+    margin-top: 3%;
+}
+.ml-5{
+  margin-left: 5px;
+}
 .border-green{
     margin-left: 3%;
     width: 46%;
@@ -198,6 +216,28 @@ h1 {
     border: 1px solid #6B8CD8;
     float: left;
 }
+.segbtn-border{
+  border:1px solid #E5E5E5;
+}
+.badge-green{
+  background-color: #29B07C;
+}
+.btn-grey{
+  background-color: #c3c2c2;
+}
+.btn-lgrey{
+  background-color: #F1F3FF;
+}
+.n-green{
+  color: #5FC596;
+}
+.w-30{
+  width: 30%!important;
+}
+.slide-height{
+  height: 100px;
+}
+
 .otp-verify-screen{
   /*background-image: linear-gradient(to right top, #29b07c, #00aea7, #00a7cb, #009cdc, #6b8cd8);*/
   background: rgba(84, 198, 187, 1.0);
@@ -205,7 +245,7 @@ background: -webkit-linear-gradient(top right, rgba(84, 198, 187, 1.0), rgba(22,
 background: -moz-linear-gradient(top right, rgba(84, 198, 187, 1.0), rgba(22, 38, 184, 1.0));
 background: linear-gradient(to bottom left, rgba(84, 198, 187, 1.0), rgba(22, 38, 184, 1.0));
 }
-label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
+label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-active{
   border-color: #6B8CD8;
   background-color: #6B8CD8;
 }
@@ -221,8 +261,14 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
 .mb-5p{
     margin-bottom: 5%;
 }
-.list .item-input-outline .item-floating-label{
-    color: #6B8CD8;
+.mb-2p{
+    margin-bottom: 2%;
+}
+.mb-17p{
+  margin-bottom: 17%;
+}
+.list .item-input-outline .item-floating-label,.power{
+    color: #6B8CD8!important;
 }
 .item-input-outline.item-input-focused .item-input-wrap:after{
     border-color: #6B8CD8;
@@ -236,11 +282,14 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
 .fs-12{
     font-size: 12px;
 }
+.fs-13{
+    font-size: 13px!important;
+}
 .fs-14{
     font-size: 14px;
 }
 .fs-16{
-    font-size: 16px;
+    font-size: 16px!important;
 }
 .fs-26{
     font-size: 26px;
@@ -276,13 +325,47 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
 .text-red{
     color: #e42525;
 }
+.text-black{
+    color: #000;
+}
+.text-grey{
+    color: #868383!important;
+}
+.badge_grey{
+  background-color: #868383;
+}
+.slider_bottom{  
+  /*bottom: 0;*/
+
+  /*position: fixed;
+  bottom: 48px;*/
+
+  position: inherit;
+  top: 28%;
+}
+.slider_bottom_prod{
+  position: inherit;
+  top: 43%;
+}
+.pos_slider{
+  position: inherit;
+  top: 0%;   
+}
 .img-responsive{
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
-.cat_nm{
-
+.w-100{
+  width: 100%;
+}
+.lbtn-outline{
+  border: 2px solid #6B8CD8;
+  color: #6B8CD8
+}
+.swiper-container_slider {
+  width: 100%!important;
+  overflow: hidden;
 }
 @keyframes fade {
     from { opacity: 1.0; }
@@ -307,6 +390,9 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
     .sanghvi_letters img{
       height: 32px;
     }
+    .sanghvi_letters_db img{
+      height: 26px;
+    }
 }
 @media only screen and (max-width: 1080px) {
     .logo img{
@@ -315,5 +401,8 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox{
 
     .sanghvi_letters img{
       height: 32px;
+    }
+    .sanghvi_letters_db img{
+      height: 26px;
     }
 }

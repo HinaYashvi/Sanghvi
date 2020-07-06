@@ -1,5 +1,5 @@
-<div data-name="dashboard" class="page">
-  <!-- Fixed Toolbar -->
+<div data-name="company_category" class="page">
+	<!-- Fixed Toolbar -->
   <div class="toolbar toolbar-bottom">
     <div class="toolbar-inner display-block ">
       <a class="link"><div class="text-white">Version 1.0</div></a>
@@ -9,18 +9,17 @@
     <div class="navbar-bg"></div>
     <div class="navbar-inner sliding navbg">
       <div class="left">
-        <a class="link back">
-          <!--i class="f7-icons">arrow_left</i-->          
+        <a class="link back text-grey" onclick="slideradjust()">
+          <i class="f7-icons">arrow_left</i>          
         </a>
       </div>
-      <div class="title ">Dashboard</div>
+      <div class="title cat_name text-capitalize fs-16"></div>
       <!--div class="right"><a class="button panel-open" href="#" data-panel=".panel-right-2"><i class="f7-icons text-white">bars</i></div-->
-      <!--div class="right">
-        <a class="link panel-open" href="#" data-panel=".panel-right-2"><i class="f7-icons text-white">bars</i></a>
-      </div-->
       <div class="right">
-        <a class="link power fw-600" href="#" onclick="logOut()"><i class="f7-icons ">power</i></a>
+        <a class="link" href="/dashboard/"><i class="f7-icons text-grey">house_fill</i></a>
+        <a class="link panel-open" href="#" data-panel=".panel-right-2" onclick="menuload()"><i class="f7-icons text-grey">bars</i></a>
       </div>
+      
     </div>
   </div>
 
@@ -35,16 +34,14 @@
         <div class="col-10"></div>
       </div>              
     </div>
-    <div class="block mb-0">    
+    <div class="block mb-0 mt-5p">    
       <div class="row">   
-        <div class="col-100 dashcats"></div>
+        <div class="col-100 comps"></div>
       </div>
    </div>
    <div class="row slider"></div>
-
-    <div class="swiper-container_slider slide-height swiper-init demo-swiper">
+    <div class="swiper-container_slider1 slide-height swiper-init demo-swiper">
       <div class="swiper-wrapper "></div>   
     </div>
-
   </div>
 </div>

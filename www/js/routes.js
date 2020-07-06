@@ -20,4 +20,26 @@ var routes = [
     url: './dashboard.html',
     name: 'dashboard',
   }, 
+  /*{
+    path: '/company_category/:c_id/:c_name/:segment/',
+    url: './company_category.html?c_id={{c_id}}/c_name={{c_name}}/segment={{segment}}',
+    name: 'company_category',
+  },*/
+  {
+    path: '/company_category/',
+    url: './company_category.html',
+    name: 'company_category',
+  },
+
+  /*{
+    path: '/company_category/:c_id/:c_name/',
+    url: './company_category.html?c_id={{c_id}}/c_name={{c_name}}',
+    name: 'company_category',
+  }, */
+  {
+    path: '/products/:comp_id/:cat_name/:comp_name/',
+    url: './products.html?comp_id={{comp_id}}/cat_name={{cat_name}}/comp_name={{comp_name}}',
+    name: 'products',
+  }, 
+  
 ];
