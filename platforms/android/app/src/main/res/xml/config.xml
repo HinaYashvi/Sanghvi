@@ -43,7 +43,7 @@
         <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
         <param name="onload" value="true" />
     </feature>
-    <name>sanghvi consultancy</name>
+    <name>Sanghvi consultancy</name>
     <description>
         This mobile app is developed for Sanghvi consultancy.
     </description>

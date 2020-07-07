@@ -909,6 +909,18 @@ function checkspecialchars_pass(pass){
     return false;
   }
 }
+function compare_passwords_submit(){
+  checkConnection();  
+  var new_pass = $("#new_pass").val();
+  var reent_pass = $("#reent_pass").val();
+  if(new_pass!='' && reent_pass!=''){
+    if(new_pass!=reent_pass){
+      return false;
+    }else{
+      return true;
+    }
+  }
+}
 function save_password(){
   checkConnection();
   var changepass_form = $(".changepass_form").serialize();
@@ -926,28 +938,34 @@ function save_password(){
     app.dialog.alert("Re-type password is required");
     return false;
   }else{
+    var chksamepass=compare_passwords_submit();
+    if(chksamepass==false){
+      $("#notsame_pass").html("<i class='f7-icons fs-14 mr-5'>xmark_circle_fill</i>Passwords not matched.");
+      return false;
+    }else{
     app.preloader.show();
-    $.ajax({
-      type:'POST', 
-      url:base_url+'APP/Appcontroller/changepassword',
-      data:changepass_form+"&session_regid="+session_regid,  
-      success:function(authRes){ 
-        var parsedata = $.parseJSON(authRes);
-        var msg = parsedata.msg;
-        if(msg=='updated'){
-          app.dialog.alert("Password updated successfully!");
-          mainView.router.navigate("/dashboard/");
-          return false;
-        }else if(msg=='wrong_old'){
-          $("#old_pass").val('');
-          $("#new_pass").val('');
-          $("#reent_pass").val('');
-          app.dialog.alert("Incorrect old password");
-          return false;
+      $.ajax({
+        type:'POST', 
+        url:base_url+'APP/Appcontroller/changepassword',
+        data:changepass_form+"&session_regid="+session_regid,  
+        success:function(authRes){ 
+          var parsedata = $.parseJSON(authRes);
+          var msg = parsedata.msg;
+          if(msg=='updated'){
+            app.dialog.alert("Password updated successfully!");
+            mainView.router.navigate("/dashboard/");
+            return false;
+          }else if(msg=='wrong_old'){
+            $("#old_pass").val('');
+            $("#new_pass").val('');
+            $("#reent_pass").val('');
+            app.dialog.alert("Incorrect old password");
+            return false;
+          }
         }
-      }
-    });
-    app.preloader.hide(); 
+      });
+      app.preloader.hide(); 
+    }
   }
 }
 function ValidateEmail_forgotpass(mail){
@@ -963,29 +981,46 @@ function ValidateEmail_forgotpass(mail){
     $("#emailformaterror").html("");
     return false;
   }
- }
+}
+function checkemailFormat(mail){
+  var format_chk = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  var chk_email_forgot=format_chk.test(mail);
+  return chk_email_forgot;
+}
  function forgot_password(){
   checkConnection();  
   var forgot_email=$("#forgot_email").val();
   if(forgot_email==''){
     app.dialog.alert("Email is required");
     return false;
-  }else{
-    app.preloader.show();
-    $.ajax({
-      type:'POST', 
-      url:base_url+'APP/Appcontroller/forgotpassword',
-      data:{'email':forgot_email},
-      success:function(authRes){ 
-        var parsedata = $.parseJSON(authRes);
-        var msg = parsedata.msg;
-        if(msg=='updated'){
-          app.dialog.alert("Check your email to get the password and try to login using that password");
-          mainView.router.navigate("/");
-          return false;
+  }else{    
+    var chkvalid_email=checkemailFormat(forgot_email);
+    if(chkvalid_email==false){
+      $("#emailformaterror").removeClass("display-none");
+      $("#emailformaterror").addClass("display-block");
+      $("#emailformaterror").html("<i class='f7-icons fs-14 mr-5'>xmark_circle_fill</i>Invalide Email.")
+      return false;
+    }else{
+      app.preloader.show();
+      $.ajax({
+        type:'POST', 
+        url:base_url+'APP/Appcontroller/forgotpassword',
+        data:{'email':forgot_email},
+        success:function(authRes){ 
+          var parsedata = $.parseJSON(authRes);
+          var msg = parsedata.msg;
+          if(msg=='updated'){
+            app.dialog.alert("Check your email to get the password and try to login using that password");
+            mainView.router.navigate("/");
+            return false;
+          }else if(msg=='noemail_exist'){
+            app.dialog.alert("Email not exists");
+            mainView.router.navigate("/");
+            return false;
+          }
         }
-      }
-    });
+      });
+    }
     app.preloader.hide();
   }  
  }
