@@ -1024,6 +1024,9 @@ function checkemailFormat(mail){
     app.preloader.hide();
   }  
  }
+ function goback(){
+  mainView.router.back();
+}
 // -------------------------------- L O G O U T -------------------------------- //
 function logOut(){
   checkConnection();
