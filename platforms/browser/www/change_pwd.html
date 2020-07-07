@@ -1,0 +1,101 @@
+<div data-name="change_pwd" class="page">
+	<!-- Fixed Toolbar -->
+  <div class="toolbar toolbar-bottom">
+    <div class="toolbar-inner display-block ">
+      <a class="link"><div class="text-white">Version 1.0</div></a>
+    </div>
+  </div>
+  <div class="navbar">
+    <div class="navbar-bg"></div>
+    <div class="navbar-inner sliding navbg">
+      <div class="left">
+        <a class="link back text-grey" >
+          <i class="f7-icons">arrow_left</i>          
+        </a>
+      </div>
+      <div class="title text-capitalize fs-16">change password</div>
+      <!--div class="right"><a class="button panel-open" href="#" data-panel=".panel-right-2"><i class="f7-icons text-white">bars</i></div-->
+      <div class="right">
+        <a class="link" href="/dashboard/"><i class="f7-icons text-grey">house_fill</i></a>
+        <a class="link panel-open" href="#" data-panel=".panel-right-2" onclick="menuload()"><i class="f7-icons text-grey">bars</i></a>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="page-content dashboard-screen-content">
+    <div class="logo_seocnd">
+      <div class="row">
+        <div class="col-30"></div>
+        <div class="col-60">
+          <div class="only_logo_db float-left"><img src="img/only_logo.png" /></div>
+          <div class="sanghvi_letters_db float-left pt-5p"><img src="img/sangvi_letters.png" class="logoimg" /></div>
+        </div> 
+        <div class="col-10"></div>
+      </div>              
+    </div>
+    <div class="block mb-0 mt-5p">    
+      <div class="row">   
+        <div class="col-100">
+          <div class="chnage_pass">
+            <form id="changepass_form" class="changepass_form">
+              <div class="row">
+                <div class="col-5"></div>
+                <div class="col-90">
+                  <div class="elevation-9 el-9 mb-5p">
+                    <div class="list no-hairlines-md">
+                      <ul>
+                        <li class="item-content item-input item-input-outline">
+                          <div class="item-inner">
+                            <div class="item-title item-floating-label">Old Password</div>
+                            <div class="item-input-wrap">
+                              <input type="password" placeholder="Old Password" name="old_pass" id="old_pass">
+                              <span class="input-clear-button"></span>
+                            </div>
+                          </div>
+                        </li>
+
+                        <li class="item-content item-input item-input-outline">
+                          <div class="item-inner">
+                            <div class="item-title item-floating-label">New Password</div>
+                            <div class="item-input-wrap">
+                              <input type="password" placeholder="New Password" name="new_pass" id="new_pass" onkeyup="compare_passwords()" onfocusout="checkspecialchars_pass(this.value)">
+                              <span class="input-clear-button"></span>
+                            </div>
+                          </div>
+                        </li>
+
+                        <li class="item-content item-input item-input-outline">
+                          <div class="item-inner">
+                            <div class="item-title item-floating-label">Re-enter Password</div>
+                            <div class="item-input-wrap">
+                              <input type="password" placeholder="Re-enter Password" name="reent_pass" id="reent_pass" onkeyup="compare_passwords()" onfocusout="checkspecialchars_pass(this.value)">
+                              <span class="input-clear-button"></span>
+                            </div>
+                          </div>
+                        </li>
+                        <span class="text-left text-red fs-12" id='lblError_pass'></span><br/>
+                        <span class="text-left text-red fs-12" id='notsame_pass'></span>
+                      </ul>
+
+                      <div class="block">
+                        <div class="row">
+                          <button type="button" class="col button button-fill loginbtn" onclick="save_password()">Save</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+                <div class="col-5"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+   </div>
+   <div class="row slider"></div>
+    <div class="swiper-container_slider slide-height swiper-init demo-swiper">
+      <div class="swiper-wrapper"></div>   
+    </div>
+  </div>
+</div>

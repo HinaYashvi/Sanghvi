@@ -204,6 +204,12 @@ h1 {
 .ml-5{
   margin-left: 5px;
 }
+.ml-5p{
+  margin-left: 5%;
+}
+.ml-15 {
+    margin-left: 15px;
+}
 .border-green{
     margin-left: 3%;
     width: 46%;
@@ -280,7 +286,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
     background-color: #6B8CD8;
 }
 .fs-12{
-    font-size: 12px;
+    font-size: 12px!important;
 }
 .fs-13{
     font-size: 13px!important;
@@ -363,7 +369,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
   border: 2px solid #6B8CD8;
   color: #6B8CD8
 }
-.swiper-container_slider {
+.swiper-container_slider,.swiper-container_slider1 {
   width: 100%!important;
   overflow: hidden;
 }

@@ -6,6 +6,11 @@ var routes = [
     name: 'index',
   },
   {
+    path: '/internet/',
+    url: './internet.html',
+    name: 'internet',
+  },
+  {
     path: '/registration/',
     url: './registration.html',
     name: 'registration',
@@ -41,5 +46,19 @@ var routes = [
     url: './products.html?comp_id={{comp_id}}/cat_name={{cat_name}}/comp_name={{comp_name}}',
     name: 'products',
   }, 
-  
+  {
+    path: '/profile/',
+    url: './profile.html',
+    name: 'profile',
+  },
+  {
+    path: '/change_pwd/',
+    url: './change_pwd.html',
+    name: 'change_pwd',
+  },
+  {
+    path: '/forgot_pwd/',
+    url: './forgot_pwd.html',
+    name: 'forgot_pwd',
+  },
 ];

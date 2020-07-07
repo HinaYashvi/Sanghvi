@@ -72,7 +72,6 @@ function onBackKeyDown() {
 function checkStorage(){
   checkConnection();  
   var session_regid = window.localStorage.getItem("session_regid");
-  //alert(session_regid);
   if(session_regid!=null){
     mainView.router.navigate("/dashboard/");
   }else{
@@ -90,7 +89,7 @@ function checkConnection(){
 function logincheck(){
   checkConnection();    
   var lform = $(".lform").serialize();
-  console.log(lform);
+  //console.log(lform);
   var email = $("#email").val();
   var password = $("#password").val();
   if(email==''){
@@ -104,6 +103,7 @@ function logincheck(){
   }else{
     $("#passerror").html("");
     $("#emailerror").html("");
+    app.preloader.show();
     $.ajax({
       type:'POST', 
       url:base_url+'APP/Appcontroller/authenticateUser',
@@ -145,6 +145,7 @@ function logincheck(){
         }        
       }
     });
+    app.preloader.hide();
   }
 }
 function secondpart_reg(){
@@ -215,21 +216,10 @@ function secondpart_reg(){
     $("#second_section").addClass("display-block");
     $(".logo_seocnd").removeClass("display-none");
     $(".logo_seocnd").addClass("display-block");
-    
-    /*$("#first_section").removeClass("display-block");
-    $("#first_section").addClass("display-none");
-    $(".logo").removeClass("display-block");
-    $(".logo").addClass("display-none");
-
-    $("#mainrow").addClass("jc-fs");
-    $("#second_section").removeClass("display-none");
-    $("#second_section").addClass("display-block");
-    $(".logo_seocnd").removeClass("display-none");
-    $(".logo_seocnd").addClass("display-block");*/
-  }
-  
+  }  
 }
 function compare_pass(){
+  checkConnection();  
   var reg_pass = $("#reg_pass").val();
   var re_pass = $("#re_pass").val();
   $("#regre_passerror").html("");
@@ -254,8 +244,8 @@ $(document).on('page:init', '.page[data-name="registration"]', function (page) {
       app.preloader.show();
       var parseres = $.parseJSON(res);
       var html = parseres.html;
-      $(".categories").html(html);
-      app.preloader.hide();
+      $(".categories").html(html);    
+      app.preloader.hide();  
     }
   });
 });
@@ -265,11 +255,23 @@ function checklength(mob){
     app.dialog.alert("Mobile no must be of 10 digits only");       
     $(".reg_mobile").val('');
     $(".reg_mobile").focus();
+    $("#mobile_prof").val('');
+    $("#mobile_prof").focus();
+    return false;
+  }
+}
+function checklength_zipcode(zipcd){
+  var ziplen=zipcd.length;
+  if(ziplen > 6){    
+    app.dialog.alert("Zipcode must be of 6 digits only");       
+    $("#zipcode_prof").val('');
+    $("#zipcode_prof").focus();
     return false;
   }
 }
 function registerMe(){
-  checkConnection();   
+  checkConnection(); 
+  app.preloader.show();  
   var rform = $(".rform").serialize();
   var reg_mobile = $("#reg_mobile").val();
   //console.log(rform);
@@ -293,15 +295,20 @@ function registerMe(){
       }
     }
   });
+  app.preloader.hide(); 
 }
 $(document).on('page:init', '.page[data-name="otp_verify"]', function (page) {
   checkConnection();
+  app.preloader.show();
   var reg_mobile = page.detail.route.params.reg_mobile; 
   var insert_id = page.detail.route.params.insert_id;
   $("#last_ins_id").val(insert_id);
   $(".otp_txt").html('Your are registered successfully.Please enter and verify the OTP sent to your registered mobile number '+reg_mobile+'.');
+  app.preloader.hide();
 });
 function verify_otp(){
+  checkConnection();
+  app.preloader.show(); 
   var otp_ver = $("#otp_ver").val();
   var last_ins_id = $("#last_ins_id").val();
   $.ajax({
@@ -326,6 +333,7 @@ function verify_otp(){
       }
     }
   });
+  app.preloader.hide(); 
 }
 function showletter(show){
   if(show=='show'){
@@ -367,8 +375,8 @@ function checkemailexists(emailid){
         return false;*/
         if(otp_msg=='otp_notsend'){
           var toastIcon = app.toast.create({
-            icon: '<i class="f7-icons">Email id already registerd.Try to login.</i>',
-            text: 'OTP verified!',
+            icon: '<i class="f7-icons">checkmark_alt_circle</i>',
+            text: 'Email alreay exists! Try to login.',
             position: 'center',
             closeTimeout: 3000,
           });
@@ -391,11 +399,11 @@ function checkemailexists(emailid){
 }
 $(document).on('page:init', '.page[data-name="dashboard"]', function (page) {
   checkConnection();
+  app.panel.close();
   app.preloader.show();
   //$(".slider").removeClass("slider_bottom");
   $(".swiper-container_slider").removeClass("slider_bottom");
   var slides='';
-  setTimeout(function(){
     $.ajax({
       type:'POST',     
       url:base_url+'APP/Appcontroller/sliderimages', 
@@ -410,52 +418,44 @@ $(document).on('page:init', '.page[data-name="dashboard"]', function (page) {
         if(tot_slides>0){
           $(".swiper-wrapper").html(slides);
             var swiper1 = new Swiper('.swiper-container_slider', {
-            //parallax: true,
-            //autoHeight: true,
-            setWrapperSize: true,
-            slidesPerView: 1,
-            spaceBetween: 0,  
-            centeredSlides: true,
-            autoplay: {
-              delay: 3000,
-              disableOnInteraction: false,
-            },
-            pagination: {
-              el: '.swiper-pagination',
-              clickable: true, 
-              dynamicBullets: true,
-            },
-            observer: true,
-            observeParents: true, 
+              setWrapperSize: true,
+              slidesPerView: 1,
+              spaceBetween: 0,  
+              centeredSlides: true,
+              autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+              },
+              pagination: {
+                el: '.swiper-pagination',
+                clickable: true, 
+                dynamicBullets: true,
+              },
+              observer: true,
+              observeParents: true, 
           });
         }else{
           $(".swiper-container_slider").remove();
-        }
-        /*var total_records = parseres.total_records;
+        }        
+      }
+    });
+  
+    $.ajax({
+      type:'POST',     
+      url:base_url+'APP/Appcontroller/getCategoriesDashboard', 
+      success:function(res){      
+        var parseres = $.parseJSON(res);
+        var html = parseres.html;
+        $(".dashcats").html(html);
+        var total_records = parseres.total_records;
         if(total_records==0){
           $(".swiper-container_slider").addClass("slider_bottom");
         }else{
           $(".swiper-container_slider").removeClass("slider_bottom");
-        }*/
+        }      
       }
     });
-  },5000);
-  $.ajax({
-    type:'POST',     
-    url:base_url+'APP/Appcontroller/getCategoriesDashboard', 
-    success:function(res){      
-      var parseres = $.parseJSON(res);
-      var html = parseres.html;
-      $(".dashcats").html(html);
-      var total_records = parseres.total_records;
-      if(total_records==0){
-        $(".swiper-container_slider").addClass("slider_bottom");
-      }else{
-        $(".swiper-container_slider").removeClass("slider_bottom");
-      }      
-    }
-  });
-  app.preloader.hide();
+    app.preloader.hide();
 });
 function checkspecialchars(pass){
   $("#lblError").html("");
@@ -468,11 +468,13 @@ function checkspecialchars(pass){
     return false;
   }
 }
-function ValidateEmail(mail) 
-{
+function ValidateEmail(mail){
   var format_chk = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   var chk_email=format_chk.test(mail);
+  //alert(chk_email);
   if(chk_email==false){
+    $("#invalidemailerror").removeClass("display-none");
+    $("#invalidemailerror").addClass("display-block");
     $("#invalidemailerror").html("<i class='f7-icons fs-14 mr-5'>xmark_circle_fill</i>Invalide Email.");
     return false;
   }else{
@@ -494,15 +496,41 @@ function getCatData(c_id,c_name,segment){
       var parseres = $.parseJSON(res);
       var html = parseres.html;
       var catname = parseres.catname;
-      /*var slider = parseres.slider;
+      var total_records = parseres.total_records;
+      if(total_records==0){
+        $(".swiper-container_slider1").addClass("slider_bottom");
+        // $(".swiper-container_slider").removeClass("slider_bottom"); 
+        // $(".swiper-container_slider").addClass("slider_bottom_prod");
+      }else{
+        $(".swiper-container_slider1").removeClass("slider_bottom");
+      }      
+      $(".comps").html(html);
+      //$(".slider").html(slider);
+      $(".cat_name").html(catname);
+    }
+  });
+  app.preloader.hide();
+}
+$(document).on('page:init', '.page[data-name="company_category"]', function (page) {
+  checkConnection();
+  app.preloader.show();
+  $(".swiper-container_slider1").removeClass("slider_bottom");
+  app.panel.close();
+  var slides='';  
+  $.ajax({
+    type:'POST',     
+    url:base_url+'APP/Appcontroller/sliderimages', 
+    success:function(res){      
+      var parseres = $.parseJSON(res);
+      var slider = parseres.slider; 
       var tot_slides = slider.length;
       for(var i=0;i<tot_slides;i++){
         var adv_img_path = slider[i].adv_img_path;
         slides+='<div class="swiper-slide dash_slides"><img src="'+base_url+adv_img_path+'" class="w-100 slide-height"></div>';
       }
-      if(tot_slides>0){
+      if(tot_slides>0){ 
         $(".swiper-wrapper").html(slides);
-          var swiper1 = new Swiper('.swiper-container_slider', {
+          var swiper2 = new Swiper('.swiper-container_slider1', {
           //parallax: true,
           //autoHeight: true,
           setWrapperSize: true,
@@ -513,7 +541,6 @@ function getCatData(c_id,c_name,segment){
             delay: 3000,
             disableOnInteraction: false,
           },
-          
           pagination: {
             el: '.swiper-pagination',
             clickable: true, 
@@ -523,81 +550,10 @@ function getCatData(c_id,c_name,segment){
           observeParents: true, 
         });
       }else{
-        $(".swiper-container_slider").remove();
+        $(".swiper-container_slider1").remove();
       }
-      var catname = parseres.catname;
-      var total_records = parseres.total_records;
-      if(total_records==0){
-        $(".swiper-container_slider").addClass("slider_bottom");
-      }else{
-        $(".swiper-container_slider").removeClass("slider_bottom");
-      }*/
-      var total_records = parseres.total_records;
-      if(total_records==0){
-        $(".swiper-container_slider1").addClass("slider_bottom");
-        // $(".swiper-container_slider").removeClass("slider_bottom"); 
-        // $(".swiper-container_slider").addClass("slider_bottom_prod");
-      }else{
-        $(".swiper-container_slider1").removeClass("slider_bottom");
-      }
-
-      
-      $(".comps").html(html);
-      //$(".slider").html(slider);
-      $(".cat_name").html(catname);
     }
-  });
-  app.preloader.hide();
-}
-$(document).on('page:init', '.page[data-name="company_category"]', function (page) {
-  //alert("page loaded");
-  $(".swiper-container_slider1").removeClass("slider_bottom");
-  var slides='';
-  setTimeout(function(){
-    $.ajax({
-      type:'POST',     
-      url:base_url+'APP/Appcontroller/sliderimages', 
-      success:function(res){      
-        var parseres = $.parseJSON(res);
-        var slider = parseres.slider; 
-        var tot_slides = slider.length;
-        for(var i=0;i<tot_slides;i++){
-          var adv_img_path = slider[i].adv_img_path;
-          slides+='<div class="swiper-slide dash_slides"><img src="'+base_url+adv_img_path+'" class="w-100 slide-height"></div>';
-        }
-        if(tot_slides>0){ 
-          $(".swiper-wrapper").html(slides);
-            var swiper2 = new Swiper('.swiper-container_slider1', {
-            //parallax: true,
-            //autoHeight: true,
-            setWrapperSize: true,
-            slidesPerView: 1,
-            spaceBetween: 0,  
-            centeredSlides: true,
-            autoplay: {
-              delay: 3000,
-              disableOnInteraction: false,
-            },
-            pagination: {
-              el: '.swiper-pagination',
-              clickable: true, 
-              dynamicBullets: true,
-            },
-            observer: true,
-            observeParents: true, 
-          });
-        }else{
-          $(".swiper-container_slider1").remove();
-        }
-        /*var total_records = parseres.total_records;
-        if(total_records==0){
-          $(".swiper-container_slider").addClass("slider_bottom");
-        }else{
-          $(".swiper-container_slider").removeClass("slider_bottom");
-        }*/
-      }
-    });
-  },5000);
+  });  
   app.preloader.hide();
 });
 /*$(document).on('page:init', '.page[data-name="company_category"]', function (page) {
@@ -662,13 +618,14 @@ function view_products(comp_id,cat_name,comp_name){
 }
 $(document).on('page:init', '.page[data-name="products"]', function (page) {
   checkConnection();
+  app.panel.close();
+  app.preloader.show();
   var comp_id = page.detail.route.params.comp_id; 
   var cat_name = page.detail.route.params.cat_name;
   var comp_name = page.detail.route.params.comp_name;
   app.preloader.show();
   $(".cat_name").html(cat_name);
-  var slides='';
-  
+  var slides='';  
   $.ajax({
     type:'POST',     
     url:base_url+'APP/Appcontroller/sliderimages', 
@@ -683,33 +640,26 @@ $(document).on('page:init', '.page[data-name="products"]', function (page) {
       if(tot_slides>0){
         $(".swiper-wrapper").html(slides);
           var swiper3 = new Swiper('.swiper-container_slider', {
-          //parallax: true,
-          //autoHeight: true,
-          setWrapperSize: true,
-          slidesPerView: 1,
-          spaceBetween: 0,  
-          centeredSlides: true,
-          autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-          },
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true, 
-            dynamicBullets: true,
-          },
-          observer: true,
-          observeParents: true, 
-        });
+            setWrapperSize: true,
+            slidesPerView: 1,
+            spaceBetween: 0,  
+            centeredSlides: true,
+            autoplay: {
+              delay: 3000,
+              disableOnInteraction: false,
+            },
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true, 
+              dynamicBullets: true,
+            },
+            observer: true,
+            observeParents: true, 
+          });
       }else{
         $(".swiper-container_slider").remove();
       }
       var total_records = parseres.total_records;
-      /*if(total_records==0){
-        $(".swiper-container_slider").addClass("slider_bottom");
-      }else{
-        $(".swiper-container_slider").removeClass("slider_bottom");
-      }*/
     }
   });
 
@@ -720,58 +670,7 @@ $(document).on('page:init', '.page[data-name="products"]', function (page) {
     success:function(res){
       var parseres = $.parseJSON(res);
       var html = parseres.html;
-      /*var slider = parseres.slider;
       var total_records = parseres.total_records;
-      var tot_slides = slider.length;
-      for(var i=0;i<tot_slides;i++){
-        var adv_img_path = slider[i].adv_img_path;
-        slides+='<div class="swiper-slide dash_slides"><img src="'+base_url+adv_img_path+'" class="w-100 slide-height"></div>';
-      }
-      if(tot_slides>0){
-        $(".swiper-wrapper").html(slides);
-          var swiper1 = new Swiper('.swiper-container_slider', {
-          //parallax: true,
-          //autoHeight: true,
-          setWrapperSize: true,
-          slidesPerView: 1,
-          spaceBetween: 0,  
-          centeredSlides: true,
-          autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-          },
-          
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true, 
-            dynamicBullets: true,
-          },
-          observer: true,
-          observeParents: true, 
-        });
-      }else{
-        $(".swiper-container_slider").remove();
-      }
-      if(total_records==0){ 
-        $(".swiper-container_slider").addClass("slider_bottom");
-      }else{
-        $(".swiper-container_slider").removeClass("slider_bottom");        
-      }*/
-      
-      /*if(total_records==0){ 
-        $(".swiper-container_slider").addClass("slider_bottom");
-      }else if(total_records==1){ 
-        $(".swiper-container_slider").removeClass("slider_bottom");
-        $(".swiper-container_slider").addClass("pos_slider");
-      }else{
-        $(".swiper-container_slider").removeClass("slider_bottom");        
-      }*/
-      var total_records = parseres.total_records;
-      /*if(total_records==0){
-        $(".swiper-container_slider").addClass("slider_bottom");
-      }else{
-        $(".swiper-container_slider").removeClass("slider_bottom");
-      }*/
       if(total_records==0){
         $(".swiper-container_slider").removeClass("slider_bottom"); 
         $(".swiper-container_slider").addClass("slider_bottom_prod");
@@ -801,6 +700,295 @@ function openpopup_product(comp_name,p_name,p_desc){
   });
   dynamicPopup_prod.open();
 }
+function menuload(){
+  checkConnection();
+  var menulist='';    
+  var session_regid = window.localStorage.getItem("session_regid");  
+  var session_user_name = window.localStorage.getItem("session_user_name"); 
+  var session_user_mob = window.localStorage.getItem("session_user_mob");  
+  var session_user_email = window.localStorage.getItem("session_user_email");  
+  menulist+='<p><center><img id="user_pic" src="img/nouser.png" height="100" width="100" class="img-circle"></center></p><p ><center id="userName" class="text-uppercase">'+session_user_name+'</center></p><p ><center id="userEmail" class=""><i class="f7-icons fs-14 mr-5">envelope_fill</i><span class="fs-12">'+session_user_email+'</span></center></p><p ><center id="userMo" class="text-uppercase"><i class="f7-icons fs-14 mr-5">phone_circle_fill</i>'+session_user_mob+'</center></p><br/><p><a class="text-white link" href="/profile/" ><i class="f7-icons fs-16 mr-5">person_crop_circle</i>Profile</a></p><p><a class="text-white link" href="/change_pwd/" ><i class="f7-icons fs-16 mr-5">lock</i>Change Password</a></p><p><a class="text-white link" href="#" onclick="logOut()"><i class="f7-icons fs-16 mr-5">power</i>Logout</a></p>';
+  $(".menulist").html(menulist);
+}
+$(document).on('page:init', '.page[data-name="profile"]', function (page) {
+  checkConnection();
+  app.panel.close();
+  app.preloader.show();
+  $(".swiper-container_slider").removeClass("slider_bottom");
+  var slides='';
+  $.ajax({
+    type:'POST',     
+    url:base_url+'APP/Appcontroller/sliderimages', 
+    success:function(res){      
+      var parseres = $.parseJSON(res);
+      var slider = parseres.slider; 
+      var tot_slides = slider.length;
+      for(var i=0;i<tot_slides;i++){
+        var adv_img_path = slider[i].adv_img_path;
+        slides+='<div class="swiper-slide dash_slides"><img src="'+base_url+adv_img_path+'" class="w-100 slide-height"></div>';
+      }
+      if(tot_slides>0){
+        $(".swiper-wrapper").html(slides);
+          var swiper1 = new Swiper('.swiper-container_slider', {
+            setWrapperSize: true,
+            slidesPerView: 1,
+            spaceBetween: 0,  
+            centeredSlides: true,
+            autoplay: {
+              delay: 3000,
+              disableOnInteraction: false,
+            },
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true, 
+              dynamicBullets: true,
+            },
+            observer: true,
+            observeParents: true, 
+        });
+      }else{
+        $(".swiper-container_slider").remove();
+      }        
+    }
+  });
+  var session_regid = window.localStorage.getItem("session_regid");
+  $.ajax({
+    type:'POST',     
+    url:base_url+'APP/Appcontroller/getProfile',
+    data:{'session_regid':session_regid},
+    success:function(res){
+      $(".invalidemailerror").remove();
+      var parseres = $.parseJSON(res);
+      var prof = parseres.prof;
+      $(".profile").html(prof);
+    }
+  });
+  app.preloader.hide();
+});
+function checkemailexists_profile(emailid){
+  if(emailid!=''){
+    $.ajax({
+      type:'POST',     
+      url:base_url+'APP/Appcontroller/checkEmail_profile',
+      data:{'email':emailid},
+      success:function(res){
+        var parsejson = $.parseJSON(res);
+        var msg = parsejson.msg;      
+          if(msg=='exists'){
+            $("#email_prof").val("");
+            app.dialog.alert("Email already exists");
+            return false;
+          }
+        }
+    });
+  }else{
+    app.dialog.alert("Email is required");
+    return false;
+  }
+}
+function save_profile(){
+  checkConnection();
+  var session_regid = window.localStorage.getItem("session_regid");
+  var pform = $(".pform").serialize();
+  var name_prof = $("#name_prof").val();
+  var email_prof = $("#email_prof").val();
+  var mobile_prof = $("#mobile_prof").val();
+  var zipcode_prof = $("#zipcode_prof").val();
+  var state_prof = $("#state_prof").val();
+  var city_prof = $("#city_prof").val();
+  var add_prof = $("#add_prof").val();
+
+  if(name_prof==''){
+    app.dialog.alert("Name is required");
+    return false;
+  }else if(email_prof==''){
+    app.dialog.alert("Email is required");
+    return false;
+  }else if(mobile_prof==''){
+    app.dialog.alert("Mobile no is required");
+    return false;
+  }else if(zipcode_prof==''){
+    app.dialog.alert("Zipcode is required");
+    return false;
+  }else if(state_prof==''){
+    app.dialog.alert("State is required");
+    return false;
+  }else if(city_prof==''){
+    app.dialog.alert("City is required");
+    return false;
+  }else if(add_prof==''){
+    app.dialog.alert("Address is required");
+    return false;
+  }else{
+    app.preloader.show();
+    $.ajax({
+      type:'POST', 
+      url:base_url+'APP/Appcontroller/editProfile',
+      data:pform+"&session_regid="+session_regid,  
+      success:function(authRes){ 
+        var parsedata = $.parseJSON(authRes);
+        var msg = parsedata.msg;
+        if(msg=='updated'){
+          app.dialog.alert("Profile updated successfully!");
+          mainView.router.navigate("/dashboard/");
+          return false;
+        }else if(msg=='not_updated'){
+          app.dialog.alert("Problem updating profile");
+          return false;
+        }
+      }
+    });
+    app.preloader.hide();    
+  }
+}
+$(document).on('page:init', '.page[data-name="change_pwd"]', function (page) {
+  checkConnection();
+  app.panel.close();
+  app.preloader.show();
+  $(".swiper-container_slider").removeClass("slider_bottom");
+  var slides='';
+  $.ajax({
+    type:'POST',     
+    url:base_url+'APP/Appcontroller/sliderimages', 
+    success:function(res){      
+      var parseres = $.parseJSON(res);
+      var slider = parseres.slider; 
+      var tot_slides = slider.length;
+      for(var i=0;i<tot_slides;i++){
+        var adv_img_path = slider[i].adv_img_path;
+        slides+='<div class="swiper-slide dash_slides"><img src="'+base_url+adv_img_path+'" class="w-100 slide-height"></div>';
+      }
+      if(tot_slides>0){
+        $(".swiper-wrapper").html(slides);
+          var swiper1 = new Swiper('.swiper-container_slider', {
+            setWrapperSize: true,
+            slidesPerView: 1,
+            spaceBetween: 0,  
+            centeredSlides: true,
+            autoplay: {
+              delay: 3000,
+              disableOnInteraction: false,
+            },
+            pagination: {
+              el: '.swiper-pagination',
+              clickable: true, 
+              dynamicBullets: true,
+            },
+            observer: true,
+            observeParents: true, 
+        });
+      }else{
+        $(".swiper-container_slider").remove();
+      }        
+    }
+  });
+  app.preloader.hide();
+});
+function compare_passwords(){
+  checkConnection();  
+  var new_pass = $("#new_pass").val();
+  var reent_pass = $("#reent_pass").val();
+  if(new_pass!='' && reent_pass!=''){
+    if(new_pass!=reent_pass){
+      $("#notsame_pass").html("<i class='f7-icons fs-14 mr-5'>xmark_circle_fill</i>Passwords not matched.");
+      return false;
+    }else{
+      $("#notsame_pass").html("");
+      return false;
+    }
+  }
+}
+function checkspecialchars_pass(pass){
+  $("#lblError_pass").html("");
+  var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+  var chk_pass=format.test(pass);
+  if(chk_pass==true){    
+    $("#new_pass").val("");
+    $("#reent_pass").val("");
+    $("#lblError_pass").html("<i class='f7-icons fs-14 mr-5'>xmark_circle_fill</i>Only Alphabets and Numbers allowed for password.");
+    return false;
+  }
+}
+function save_password(){
+  checkConnection();
+  var changepass_form = $(".changepass_form").serialize();
+  var session_regid = window.localStorage.getItem("session_regid");
+  var old_pass = $("#old_pass").val();
+  var new_pass = $("#new_pass").val();
+  var reent_pass = $("#reent_pass").val();
+  if(old_pass==''){
+    app.dialog.alert("Old password is required");
+    return false;
+  }else if(new_pass==''){
+    app.dialog.alert("Enter new password");
+    return false;
+  }else if(reent_pass==''){
+    app.dialog.alert("Re-type password is required");
+    return false;
+  }else{
+    app.preloader.show();
+    $.ajax({
+      type:'POST', 
+      url:base_url+'APP/Appcontroller/changepassword',
+      data:changepass_form+"&session_regid="+session_regid,  
+      success:function(authRes){ 
+        var parsedata = $.parseJSON(authRes);
+        var msg = parsedata.msg;
+        if(msg=='updated'){
+          app.dialog.alert("Password updated successfully!");
+          mainView.router.navigate("/dashboard/");
+          return false;
+        }else if(msg=='wrong_old'){
+          $("#old_pass").val('');
+          $("#new_pass").val('');
+          $("#reent_pass").val('');
+          app.dialog.alert("Incorrect old password");
+          return false;
+        }
+      }
+    });
+    app.preloader.hide(); 
+  }
+}
+function ValidateEmail_forgotpass(mail){
+  var format_chk = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  var chk_email_forgot=format_chk.test(mail);
+  //alert(chk_email_forgot);
+  if(chk_email_forgot==false){
+    $("#emailformaterror").removeClass("display-none");
+    $("#emailformaterror").addClass("display-block");
+    $("#emailformaterror").html("<i class='f7-icons fs-14 mr-5'>xmark_circle_fill</i>Invalide Email.");
+    return false;
+  }else{
+    $("#emailformaterror").html("");
+    return false;
+  }
+ }
+ function forgot_password(){
+  checkConnection();  
+  var forgot_email=$("#forgot_email").val();
+  if(forgot_email==''){
+    app.dialog.alert("Email is required");
+    return false;
+  }else{
+    app.preloader.show();
+    $.ajax({
+      type:'POST', 
+      url:base_url+'APP/Appcontroller/forgotpassword',
+      data:{'email':forgot_email},
+      success:function(authRes){ 
+        var parsedata = $.parseJSON(authRes);
+        var msg = parsedata.msg;
+        if(msg=='updated'){
+          app.dialog.alert("Check your email to get the password and try to login using that password");
+          mainView.router.navigate("/");
+          return false;
+        }
+      }
+    });
+    app.preloader.hide();
+  }  
+ }
 // -------------------------------- L O G O U T -------------------------------- //
 function logOut(){
   checkConnection();
