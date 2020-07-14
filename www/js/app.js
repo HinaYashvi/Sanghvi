@@ -488,9 +488,10 @@ function getCatData(c_id,c_name,segment){
   mainView.router.navigate("/company_category/");
   app.preloader.show();
   var slides='';
+  /**/
   $.ajax({
     type:'POST',     
-    url:base_url+'APP/Appcontroller/getCategoriesData',
+    url:base_url+'APP/Appcontroller/getCategoriesData', 
     data:{'c_id':c_id,'c_name':c_name,'segment':segment},
     success:function(res){
       var parseres = $.parseJSON(res);
@@ -506,6 +507,27 @@ function getCatData(c_id,c_name,segment){
       }      
       $(".comps").html(html);
       //$(".slider").html(slider);
+      if(segment=='null'){
+    $(".all_btn").addClass("active_tab");
+    $(".ind_btn").removeClass("active_tab");
+    $(".family_btn").removeClass("active_tab");
+    $(".comp_btn").removeClass("active_tab");
+  }else if(segment=='individual'){
+    $(".ind_btn").addClass("active_tab");
+    $(".all_btn").removeClass("active_tab");
+    $(".family_btn").removeClass("active_tab");
+    $(".comp_btn").removeClass("active_tab");
+  }else if(segment=='family'){
+    $(".ind_btn").removeClass("active_tab");
+    $(".all_btn").removeClass("active_tab");
+    $(".family_btn").addClass("active_tab");
+    $(".comp_btn").removeClass("active_tab");
+  }else if(segment=='company'){
+    $(".ind_btn").removeClass("active_tab");
+    $(".all_btn").removeClass("active_tab");
+    $(".family_btn").removeClass("active_tab");
+    $(".comp_btn").addClass("active_tab");
+  }
       $(".cat_name").html(catname);
     }
   });
@@ -707,7 +729,7 @@ function menuload(){
   var session_user_name = window.localStorage.getItem("session_user_name"); 
   var session_user_mob = window.localStorage.getItem("session_user_mob");  
   var session_user_email = window.localStorage.getItem("session_user_email");  
-  menulist+='<p><center><img id="user_pic" src="img/nouser.png" height="100" width="100" class="img-circle"></center></p><p ><center id="userName" class="text-uppercase">'+session_user_name+'</center></p><p ><center id="userEmail" class=""><i class="f7-icons fs-14 mr-5">envelope_fill</i><span class="fs-12">'+session_user_email+'</span></center></p><p ><center id="userMo" class="text-uppercase"><i class="f7-icons fs-14 mr-5">phone_circle_fill</i>'+session_user_mob+'</center></p><br/><p><a class="text-white link" href="/profile/" ><i class="f7-icons fs-16 mr-5">person_crop_circle</i>Profile</a></p><p><a class="text-white link" href="/change_pwd/" ><i class="f7-icons fs-16 mr-5">lock</i>Change Password</a></p><p><a class="text-white link" href="#" onclick="logOut()"><i class="f7-icons fs-16 mr-5">power</i>Logout</a></p>';
+  menulist+='<p><center><img id="user_pic" src="img/nouser.png" height="100" width="100" class="img-circle"></center></p><p ><center id="userName" class="text-uppercase">'+session_user_name+'</center></p><p ><center id="userEmail" class=""><i class="f7-icons fs-14 mr-5">envelope_fill</i><span class="fs-12">'+session_user_email+'</span></center></p><p ><center id="userMo" class="text-uppercase"><i class="f7-icons fs-14 mr-5">phone_circle_fill</i>'+session_user_mob+'</center></p><br/><p><a class="text-white link" href="/profile/" ><i class="f7-icons fs-16 mr-5">person_crop_circle</i>Profile</a></p><p><a class="text-white link" href="/change_pwd/" ><i class="f7-icons fs-16 mr-5">lock</i>Change Password</a></p><p><a class="text-white link" href="/aboutus/" ><i class="f7-icons fs-16 mr-5">person_3_fill</i>About Us</a></p><p><a class="text-white link" href="/contactus/" ><i class="f7-icons fs-16 mr-5">phone_fill</i>Contact Us</a></p><p><a class="text-white link" href="#" onclick="logOut()"><i class="f7-icons fs-16 mr-5">power</i>Logout</a></p>';
   $(".menulist").html(menulist);
 }
 $(document).on('page:init', '.page[data-name="profile"]', function (page) {
@@ -1023,10 +1045,18 @@ function checkemailFormat(mail){
     }
     app.preloader.hide();
   }  
- }
- function goback(){
+ } 
+function goback(){
   mainView.router.back();
 }
+$(document).on('page:init', '.page[data-name="aboutus"]', function (page) {
+  checkConnection();
+  app.panel.close();  
+});
+$(document).on('page:init', '.page[data-name="contactus"]', function (page) {
+  checkConnection();
+  app.panel.close();  
+});
 // -------------------------------- L O G O U T -------------------------------- //
 function logOut(){
   checkConnection();

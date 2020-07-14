@@ -133,9 +133,6 @@ h1 {
 .only_logo img{
   height: 60px!important; 
 }
-.pt-5p{
-  padding-top: 5%;
-}
 .only_logo_db img{
   height: 50px!important; 
 }
@@ -147,6 +144,9 @@ h1 {
 }
 .pt-12p{
   padding-top: 12%!important;
+}
+.pt-15p{
+  padding-top: 15%!important;
 }
 .pt-20p{
   padding-top: 20%!important;
@@ -192,6 +192,9 @@ h1 {
 .font-lblue{
     color: #58ACE5;
 }
+.mt-0{
+    margin-top: 0px;
+}
 .mt-5{
     margin-top: 5px;
 }
@@ -199,7 +202,10 @@ h1 {
     margin-top: 5%;
 }
 .mt-3p{
-    margin-top: 3%;
+    margin-top: 3%!important;
+}
+.mt-85p{
+    margin-top: 85%;
 }
 .ml-5{
   margin-left: 5px;
@@ -228,6 +234,7 @@ h1 {
 .badge-green{
   background-color: #29B07C;
 }
+
 .btn-grey{
   background-color: #c3c2c2;
 }
@@ -264,6 +271,9 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
 .mr-5{
   margin-right: 5px;
 }
+.mr-5p{
+  margin-right: 5%;
+}
 .mb-5p{
     margin-bottom: 5%;
 }
@@ -273,7 +283,7 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
 .mb-17p{
   margin-bottom: 17%;
 }
-.list .item-input-outline .item-floating-label,.power{
+.list .item-input-outline .item-floating-label,.power,.continfo{
     color: #6B8CD8!important;
 }
 .item-input-outline.item-input-focused .item-input-wrap:after{
@@ -293,6 +303,9 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
 }
 .fs-14{
     font-size: 14px;
+}
+.fs-22{
+    font-size: 22px!important;
 }
 .fs-16{
     font-size: 16px!important;
@@ -373,6 +386,51 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
   width: 100%!important;
   overflow: hidden;
 }
+.cont_font{
+  color: #3382C7!important;
+}
+.nature_img img{
+  max-height: 100%;
+  max-width: 100%;
+  position: absolute;
+}
+.pos-rel{
+  position: relative;
+}
+.bg_div{
+  background-color: #F1F3FF;
+  color: #3382C7;
+  padding: 0% 6% 0% 6%;
+  border: 1px solid #E5E4E9;
+  font-style: italic;
+  font-size: 24px;
+  font-family: 'Open Sans', sans-serif;
+}
+.cont_icons{
+  /*background-color: #F1F3FF;
+  padding: 7px 5px 7px 5px;*/
+  background-color: #F1F3FF;
+  width: 80px;
+  height: 80px;
+  position: relative;
+}
+.cont_icons img{
+  width: 60px;
+  height: 60px; 
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.cont_title{
+  padding: 7% 0% 7% 0%;
+}
+.active_tab{
+  background-color: #6B8CD8;
+  color: #fff;
+}
 @keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
@@ -399,16 +457,21 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
     .sanghvi_letters_db img{
       height: 26px;
     }
+    .font-green{
+      font-size: 10px!important;
+    }
 }
 @media only screen and (max-width: 1080px) {
     .logo img{
         height: 200px;
     }
-
     .sanghvi_letters img{
       height: 32px;
     }
     .sanghvi_letters_db img{
       height: 26px;
+    }
+    .font-green{
+      font-size: 11px!important;
     }
 }

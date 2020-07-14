@@ -61,4 +61,14 @@ var routes = [
     url: './forgot_pwd.html',
     name: 'forgot_pwd',
   },
+  {
+    path: '/aboutus/',
+    url: './aboutus.html',
+    name: 'aboutus',
+  },
+  {
+    path: '/contactus/',
+    url: './contactus.html',
+    name: 'contactus',
+  },
 ];
