@@ -508,26 +508,26 @@ function getCatData(c_id,c_name,segment){
       $(".comps").html(html);
       //$(".slider").html(slider);
       if(segment=='null'){
-    $(".all_btn").addClass("active_tab");
-    $(".ind_btn").removeClass("active_tab");
-    $(".family_btn").removeClass("active_tab");
-    $(".comp_btn").removeClass("active_tab");
-  }else if(segment=='individual'){
-    $(".ind_btn").addClass("active_tab");
-    $(".all_btn").removeClass("active_tab");
-    $(".family_btn").removeClass("active_tab");
-    $(".comp_btn").removeClass("active_tab");
-  }else if(segment=='family'){
-    $(".ind_btn").removeClass("active_tab");
-    $(".all_btn").removeClass("active_tab");
-    $(".family_btn").addClass("active_tab");
-    $(".comp_btn").removeClass("active_tab");
-  }else if(segment=='company'){
-    $(".ind_btn").removeClass("active_tab");
-    $(".all_btn").removeClass("active_tab");
-    $(".family_btn").removeClass("active_tab");
-    $(".comp_btn").addClass("active_tab");
-  }
+        $(".all_btn").addClass("active_tab");
+        $(".ind_btn").removeClass("active_tab");
+        $(".family_btn").removeClass("active_tab");
+        $(".comp_btn").removeClass("active_tab");
+      }else if(segment=='individual'){
+        $(".ind_btn").addClass("active_tab");
+        $(".all_btn").removeClass("active_tab");
+        $(".family_btn").removeClass("active_tab");
+        $(".comp_btn").removeClass("active_tab");
+      }else if(segment=='family'){
+        $(".ind_btn").removeClass("active_tab");
+        $(".all_btn").removeClass("active_tab");
+        $(".family_btn").addClass("active_tab");
+        $(".comp_btn").removeClass("active_tab");
+      }else if(segment=='company'){
+        $(".ind_btn").removeClass("active_tab");
+        $(".all_btn").removeClass("active_tab");
+        $(".family_btn").removeClass("active_tab");
+        $(".comp_btn").addClass("active_tab");
+      }
       $(".cat_name").html(catname);
     }
   });
