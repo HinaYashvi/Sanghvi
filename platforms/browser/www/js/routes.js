@@ -25,16 +25,16 @@ var routes = [
     url: './dashboard.html',
     name: 'dashboard',
   }, 
-  /*{
+  {
     path: '/company_category/:c_id/:c_name/:segment/',
     url: './company_category.html?c_id={{c_id}}/c_name={{c_name}}/segment={{segment}}',
     name: 'company_category',
-  },*/
-  {
+  },
+  /*{
     path: '/company_category/',
     url: './company_category.html',
     name: 'company_category',
-  },
+  },*/
 
   /*{
     path: '/company_category/:c_id/:c_name/',

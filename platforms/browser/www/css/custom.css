@@ -250,7 +250,9 @@ h1 {
 .slide-height{
   height: 100px;
 }
-
+.p-2{
+  padding: 2%;
+}
 .otp-verify-screen{
   /*background-image: linear-gradient(to right top, #29b07c, #00aea7, #00a7cb, #009cdc, #6b8cd8);*/
   background: rgba(84, 198, 187, 1.0);
@@ -258,7 +260,7 @@ background: -webkit-linear-gradient(top right, rgba(84, 198, 187, 1.0), rgba(22,
 background: -moz-linear-gradient(top right, rgba(84, 198, 187, 1.0), rgba(22, 38, 184, 1.0));
 background: linear-gradient(to bottom left, rgba(84, 198, 187, 1.0), rgba(22, 38, 184, 1.0));
 }
-label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-active{
+label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-active,.dashtabs{
   border-color: #6B8CD8;
   background-color: #6B8CD8;
 }
