@@ -1095,7 +1095,7 @@ function checkemailFormat(mail){
     }
     app.preloader.hide();
   }  
- } 
+ }  
 function goback(){
   mainView.router.back();
 }
