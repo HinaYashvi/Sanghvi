@@ -8,16 +8,22 @@
   },
   "installed_plugins": {
     "cordova-plugin-battery-status": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
+      "PACKAGE_NAME": "com.phonegap.sanghvi"
     },
-    "cordova-plugin-media-capture": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.phonegap.sanghvi"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.phonegap.sanghvi"
     },
     "cordova-plugin-dialogs": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
+      "PACKAGE_NAME": "com.phonegap.sanghvi"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.phonegap.sanghvi"
     },
     "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
+      "PACKAGE_NAME": "com.phonegap.sanghvi"
     },
     "cordova-plugin-globalization": {
       "PACKAGE_NAME": "com.phonegap.sanghvi"
@@ -25,7 +31,13 @@
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "com.phonegap.sanghvi"
     },
+    "cordova-plugin-media-capture": {
+      "PACKAGE_NAME": "com.phonegap.sanghvi"
+    },
     "cordova-plugin-network-information": {
+      "PACKAGE_NAME": "com.phonegap.sanghvi"
+    },
+    "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.phonegap.sanghvi"
     },
     "cordova-plugin-vibration": {
@@ -33,17 +45,14 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.phonegap.sanghvi"
-    },
-    "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "com.phonegap.sanghvi"
     }
   },
   "dependent_plugins": {
     "cordova-plugin-compat": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
+      "PACKAGE_NAME": "com.phonegap.sanghvi"
     },
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "com.phonegap.helloworld"
+      "PACKAGE_NAME": "com.phonegap.sanghvi"
     }
   }
 }

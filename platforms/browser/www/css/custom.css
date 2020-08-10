@@ -297,6 +297,9 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
 .loginbtn{
     background-color: #6B8CD8;
 }
+.fs-10{
+    font-size: 10px!important;
+}
 .fs-12{
     font-size: 12px!important;
 }
@@ -354,6 +357,23 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
 }
 .badge_grey{
   background-color: #868383;
+}
+.uploadDiv{
+  height: 115px;
+}
+.picbox{
+  border: 1px dashed darkgray;
+  height: 90px;
+  margin: 0 auto;
+  font-size: 12px;
+  width: 30%!important;
+  text-align: center;
+}
+.picbox-text{
+  color: #848383!important;
+}
+.innerDiv{
+  margin-top: 25%!important;
 }
 .slider_bottom{  
   /*bottom: 0;*/
@@ -432,6 +452,9 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
 .active_tab{
   background-color: #6B8CD8;
   color: #fff;
+}
+.border-btn{
+  border: 1px dashed #6b8cd8;
 }
 @keyframes fade {
     from { opacity: 1.0; }

@@ -50,12 +50,15 @@ var app = new Framework7({
 }); 
 var base_url = 'http://oteqprojects.co.in/sanghvi/';
 var mainView = app.views.create('.view-main');
-
+var pictureSource; // picture source
+var destinationType;  
 document.addEventListener("deviceready", checkStorage, false); 
 document.addEventListener("deviceready", onDeviceReady, false);
 document.addEventListener("backbutton", onBackKeyDown, false);
+
 function onDeviceReady() { 
-  
+  pictureSource = navigator.camera.PictureSourceType;
+  destinationType = navigator.camera.DestinationType;
 }
 function onBackKeyDown() {
   checkConnection(); 
@@ -1110,6 +1113,122 @@ $(document).on('page:init', '.page[data-name="contactus"]', function (page) {
   app.panel.close();  
   app.preloader.hide();  
 });
+function uploadimage_doc(p_id){
+  var dynamicPopup = app.popup.create({
+  content: '<div class="popup popup_img_upload" style="overflow:scroll;"><div class="block"><p><a href="#" class="color-sgl-green">Upload Document</a></p><p><a href="#" class="link popup-close">Close me</a></p><p><div class="block"><div class="list no-hairlines-md"><ul id="adddoc"><li class="item-content item-input showtwoBlocks"><div class="item-inner"><span class="item-title item-label floatlbl_placeholder mb-15 fs-14 fw-600">Document</span><br/><div class="item-input-wrap"><div class="uploadDiv w-100 "><div class="col-100"><div class="row"><div class="20"></div><div class="col-50 picbox text-grey fs-10" ><span onclick="capturePhoto_doc();" ><div class="innerDiv"><img src="img/camera-1.png" height="30" width="30" /><br/><span class="picbox-text fw-600">Capture</span></span></div></div><div class="col-50 picbox text-grey fs-10" ><a onclick="getPhoto_doc(pictureSource.PHOTOLIBRARY);"><div class="innerDiv"><img src="img/photo.png" height="30" width="30" /><br/><span class="picbox-text text-grey fw-600">Gallery</span></div></a></div><div class="20"></div></div></div></div></div></div></li><li class="item-content item-input imageblock_doc display-none" style="width:100%;" id="imageblock_doc"><div class="item-inner"><div class="item-input-wrap"><img id="image_doc" src="" style="width:100%;"></div></div></li></ul></div></div></p></div><div class="block"><div class="row"><p><label class="checkbox"><input type="checkbox" name="hereby" id="hereby" onclick="hereby_click(this)"><i class="icon-checkbox"></i></label> I hereby agree to submit required documents for insurance product purchase.</p></div></div><div class="block svdoc display-none"><div class="row"><button type="button" class="col button dashtabs text-center text-white text-uppercase" onclick="saveDoc('+p_id+')" id="savedoc" >Save</button></div></div></div>',
+  });
+  dynamicPopup.open();
+}
+function hereby_click(obj){
+  if($(obj).prop("checked") == true){
+    //alert("Checkbox is checked.");
+    //$("#savedoc").removeAttr('disabled');
+    $(".svdoc").removeClass("display-none");
+    $(".svdoc").addClass("display-block");
+  }else if($(obj).prop("checked") == false){
+    //alert("Checkbox is not checked.");
+    //$("#savedoc").attr('disabled',true);
+    $(".svdoc").removeClass("display-block");
+    $(".svdoc").addClass("display-none");
+  }
+}
+function saveDoc(p_id){
+  var session_regid = window.localStorage.getItem("session_regid");
+  var session_user_name = window.localStorage.getItem("session_user_name");
+  var session_user_email = window.localStorage.getItem("session_user_email");
+  var session_user_mob = window.localStorage.getItem("session_user_mob");
+  var img = document.getElementById('image_doc');
+  var imageURI = img.src;
+  var options = new FileUploadOptions();
+  options.fileKey="file";
+  options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+  options.mimeType="image/jpeg";
+  options.chunkedMode = false;
+  options.headers = {
+     Connection: "close"  
+  }; 
+  var params = {};  
+  params.fullpath =imageURI;
+  params.name = options.fileName;
+  var imgfilename = params.name; 
+  //alert("imgfilename "+imgfilename);
+  var split_imgfilename = imgfilename.split("?");
+  var ft = new FileTransfer();
+  //console.log("ft :::::::::: "+ft);
+  var actual_imgname3 = split_imgfilename[0];
+  var img_filename3 = actual_imgname3.split('%20').join('_');
+  var uploadControllerURL_doc = base_url+"APP/Appcontroller/photoupload_document/"+session_regid+"/"+p_id+"/"+img_filename3;
+  //alert(uploadControllerURL_doc);  
+  $(".popup_img_upload").addClass("modal-out");   
+  $('.popup-backdrop').remove();
+  $(".popup_img_upload").html(""); 
+  //$(".popup-backdrop").removeClass("backdrop-in");
+  //$(".popup-backdrop").addClass("backdrop-out");  
+  ft.upload(imageURI,uploadControllerURL_doc, win, fail, options,true);  
+  mainView.router.navigate("/dashboard/");
+  //mainView.router.navigate("/products/"+comp_id+"/"+cat_name+"/"+comp_name+"/");
+}
+//********************************* UPLOAD DOCUMENT *************************************//
+function capturePhoto_doc(){
+  checkConnection();   
+  navigator.camera.getPicture(onPhotoDataSuccess_doc, onFail, {
+  quality: 100,
+  targetWidth: 600,
+  targetHeight: 600,
+  destinationType: destinationType.FILE_URI,
+  //saveToPhotoAlbum: true
+  saveToPhotoAlbum: false,
+  correctOrientation: true,
+  });
+}
+function onPhotoDataSuccess_doc(imageURI_rc){
+  //alert("in success "+imageURI_rc);
+  checkConnection();  
+  var cameraImage_rc = document.getElementById('image_doc');
+  //alert(cameraImage_rc);
+  $("#imageblock_doc").removeClass("display-none");
+  $("#imageblock_doc").addClass("display-block");
+  cameraImage_rc.src = imageURI_rc;
+}
+function getPhoto_doc(source) {
+  checkConnection();    
+  navigator.camera.getPicture(onPhotoURISuccess_doc, onFail, {
+    quality: 100,
+    correctOrientation: 1,
+    destinationType: destinationType.FILE_URI,
+    sourceType: source,
+    targetWidth: 500,
+    targetHeight: 500,
+  });
+} 
+function onPhotoURISuccess_doc(imageURI_gallery) {
+  checkConnection();  
+  var galleryImage_rc = document.getElementById('image_doc');
+  //alert("galleryImage "+galleryImage_rc);
+  $("#imageblock_doc").removeClass("display-none");
+  $("#imageblock_doc").addClass("display-block");
+  galleryImage_rc.src = imageURI_gallery;
+}
+function onFail(message){
+  checkConnection();  
+  app.dialog.alert('Failed because: ' + message);
+} 
+function win(r) { 
+  checkConnection();         
+  var responseCode = r.responseCode;
+  //alert(responseCode+" responseCode");
+  //alert("r = "+JSON.stringify(r));
+  //document.writeln("r = "+JSON.stringify(r));
+  if(responseCode==200){     
+    app.dialog.close();     
+  }   
+}
+function fail(error) { 
+  checkConnection();  
+  app.dialog.alert("An error has occurred: Code = " + error.code);
+  app.dialog.alert("upload error source " + error.source);
+  app.dialog.alert("upload error target " + error.target); 
+}
 // -------------------------------- L O G O U T -------------------------------- //
 function logOut(){
   checkConnection();
