@@ -41,9 +41,14 @@ var routes = [
     url: './company_category.html?c_id={{c_id}}/c_name={{c_name}}',
     name: 'company_category',
   }, */
-  {
+  /*{
     path: '/products/:comp_id/:cat_name/:comp_name/',
     url: './products.html?comp_id={{comp_id}}/cat_name={{cat_name}}/comp_name={{comp_name}}',
+    name: 'products',
+  }, */
+  {
+    path: '/products/:comp_id/:cat_name/:comp_name/:cat_slug/:c_id/',
+    url: './products.html?comp_id={{comp_id}}/cat_name={{cat_name}}/comp_name={{comp_name}}/cat_slug={{cat_slug}}/c_id={{c_id}}',
     name: 'products',
   }, 
   {

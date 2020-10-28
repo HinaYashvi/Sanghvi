@@ -20,7 +20,7 @@ var app = new Framework7({
   //material: true, //enable Material theme
   //materialRipple: false,
   routes: routes, 
-  clicks: { 
+  clicks: {  
     externalLinks: '.external',
   },
   navbar: {     
@@ -48,7 +48,9 @@ var app = new Framework7({
     app.hideIndicator();
   }
 }); 
-var base_url = 'http://oteqprojects.co.in/sanghvi/';
+//var base_url = 'http://oteqprojects.co.in/sanghvi/';
+//var base_url = 'https://staroneweb.co.in/insurance/'; // LIVE SERVER (STARONEWEB) //
+var base_url = 'https://sanghviconsultancy.com/insurance/'; // LIVE SERVER (STARONEWEB) //
 var mainView = app.views.create('.view-main');
 var pictureSource; // picture source
 var destinationType;  
@@ -76,7 +78,8 @@ function checkStorage(){
   checkConnection();  
   var session_regid = window.localStorage.getItem("session_regid");
   if(session_regid!=null){
-    mainView.router.navigate("/dashboard/");
+    //mainView.router.navigate("/dashboard/");
+    mainView.router.navigate("/aboutus/");  
   }else{
     mainView.router.navigate("/index/"); 
   }
@@ -134,7 +137,8 @@ function logincheck(){
           }); 
           toastBottom.open();
         }else if(msg=='active'){
-          mainView.router.navigate("/dashboard/");  
+          //mainView.router.navigate("/dashboard/");  
+          mainView.router.navigate("/aboutus/");  
           window.localStorage.setItem("session_regid",parsedata.user_session[0].reg_id);
           window.localStorage.setItem("session_user_name",parsedata.user_session[0].name);
           window.localStorage.setItem("session_user_cid",parsedata.user_session[0].c_id);
@@ -295,6 +299,9 @@ function registerMe(){
         });
         toastIcon.open();  
         mainView.router.navigate('/otp_verify/'+reg_mobile+"/"+insert_id+"/"); 
+      }else{
+        app.dialog.alert("Problem in registering");
+        mainView.router.navigate('/registration/');
       }
     }
   });
@@ -486,7 +493,8 @@ function ValidateEmail(mail){
     return false;
   }
  }
-function getCatData(c_id,c_name,segment){ 
+ //function getCatData(c_id,c_name,segment){
+function getCatData(c_id,c_name,segment,cat_slug){ 
   checkConnection();  
   //mainView.router.navigate("/company_category/"+c_id+"/"+c_name+"/"+segment+"/");
   //mainView.router.navigate("/company_category/");  
@@ -496,7 +504,7 @@ function getCatData(c_id,c_name,segment){
   $.ajax({
     type:'POST',     
     url:base_url+'APP/Appcontroller/getCategoriesData', 
-    data:{'c_id':c_id,'c_name':c_name,'segment':segment},
+    data:{'c_id':c_id,'c_name':c_name,'segment':segment,'cat_slug':cat_slug},
     success:function(res){
       var parseres = $.parseJSON(res);
       var html = parseres.html;
@@ -686,9 +694,9 @@ function slideradjust(){
   //$(".slider").removeClass("slider_bottom");
   //$(".swiper-container_slider").removeClass("slider_bottom");
 }
-function view_products(comp_id,cat_name,comp_name){
+function view_products(comp_id,cat_name,comp_name,cat_slug,c_id){
   checkConnection();
-  mainView.router.navigate("/products/"+comp_id+"/"+cat_name+"/"+comp_name+"/");
+  mainView.router.navigate("/products/"+comp_id+"/"+cat_name+"/"+comp_name+"/"+cat_slug+"/"+c_id+"/");
 }
 $(document).on('page:init', '.page[data-name="products"]', function (page) {
   checkConnection();
@@ -697,6 +705,8 @@ $(document).on('page:init', '.page[data-name="products"]', function (page) {
   var comp_id = page.detail.route.params.comp_id; 
   var cat_name = page.detail.route.params.cat_name;
   var comp_name = page.detail.route.params.comp_name;
+  var cat_slug = page.detail.route.params.cat_slug;
+  var c_id = page.detail.route.params.c_id;
   app.preloader.show();
   $(".cat_name").html(cat_name);
   var slides='';  
@@ -740,7 +750,7 @@ $(document).on('page:init', '.page[data-name="products"]', function (page) {
   $.ajax({
     type:'POST',     
     url:base_url+'APP/Appcontroller/getProducts',
-    data:{'comp_id':comp_id,'comp_name':comp_name},
+    data:{'comp_id':comp_id,'comp_name':comp_name,'cat_slug':cat_slug,'c_id':c_id},
     success:function(res){
       var parseres = $.parseJSON(res);
       var html = parseres.html;
@@ -1120,7 +1130,7 @@ function uploadimage_doc(p_id){
   dynamicPopup.open();
 }
 function hereby_click(obj){
-  if($(obj).prop("checked") == true){
+  if($(obj).prop("checked") == true){ 
     //alert("Checkbox is checked.");
     //$("#savedoc").removeAttr('disabled');
     $(".svdoc").removeClass("display-none");

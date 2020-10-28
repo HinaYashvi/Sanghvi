@@ -45,6 +45,9 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.phonegap.sanghvi"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.phonegap.sanghvi"
     }
   },
   "dependent_plugins": {

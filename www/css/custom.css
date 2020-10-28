@@ -151,6 +151,9 @@ h1 {
 .pt-20p{
   padding-top: 20%!important;
 }
+.pr-5p{
+  padding-right: 5%!important;
+}
 .jc-fs{
   justify-content: flex-start;
 }
@@ -201,8 +204,14 @@ h1 {
 .mt-5p{
     margin-top: 5%;
 }
+.mt-10p{
+    margin-top: 10%;
+}
 .mt-3p{
     margin-top: 3%!important;
+}
+.pt-80p{
+    padding-top: 80%;
 }
 .mt-85p{
     margin-top: 85%;
@@ -312,8 +321,14 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
 .fs-22{
     font-size: 22px!important;
 }
+.fs-15{
+    font-size: 15px!important;
+}
 .fs-16{
     font-size: 16px!important;
+}
+.fs-18{
+    font-size: 18px!important;
 }
 .fs-26{
     font-size: 26px;
@@ -400,6 +415,9 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
 .w-100{
   width: 100%;
 }
+.no-radius{
+  border-radius: 0px;
+}
 .lbtn-outline{
   border: 2px solid #6B8CD8;
   color: #6B8CD8
@@ -456,6 +474,43 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
 .border-btn{
   border: 1px dashed #6b8cd8;
 }
+.block_blue{
+  background-color: #0080FF;
+  color: #fff;
+  /*height: 115px;*/
+  height: 157px;
+  width: 107px;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-dashboard{
+  background-color: #0080FF;
+}
+.white_bg{
+  background-color: #fff;
+}
+.btn-border{
+  border:1px solid #D5D5D5;
+}
+.block_aquagreen{
+  background-color: #59C895;
+  color: #fff;
+  /*height: 172px;*/
+  height: 212px;  
+  width: 107px;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.h-50{
+  height: 50px;
+}
+.breakline{
+  margin-top: -14px;
+  position: absolute;
+  margin-left: -53px;
+}
 @keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
@@ -467,7 +522,25 @@ label.item-checkbox input[type="checkbox"]:checked ~ .icon-checkbox,.button-acti
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+.block_grey{
+  background-color: #707070;
+  color: #fff;
+  /*height: 74px;*/
+  height: 117px;
+  width: 107px;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.block_purple{
+  background-color: #6748E2;
+  color: #fff;
+  height: 74px;
+  width: 107px;  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
